@@ -118,7 +118,6 @@ async function loadImages(query) {
 
 async function loadMoreImages() {
   try {
-    const data = await pixabay.loadNextImages();
 
     if (showedImages >= totalHits) {
       refs.loader.classList.add('loader--hidden');
@@ -126,13 +125,16 @@ async function loadMoreImages() {
       stopObserver();
 
       Notify.info("We're sorry, but you've reached the end of search results.");
+    } else {
+      const data = await pixabay.loadNextImages();
+      appendGallery(data);
+
+      lightbox.refresh();
+  
+      showedImages += data.hits.length;
+ 
     }
 
-    appendGallery(data);
-
-    lightbox.refresh();
-
-    showedImages += data.hits.length;
   } catch (error) {
     console.error(error);
   }
