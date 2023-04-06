@@ -136,7 +136,7 @@ async function loadMoreImages() {
   } catch (error) {
     console.error(error);
   }
-}
+}  
 
 function buildGallery(data) {
   const markup = builder.buildCards(data.hits);
