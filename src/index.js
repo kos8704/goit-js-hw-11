@@ -107,7 +107,7 @@ async function loadImages(query) {
 
     showedImages = data.hits.length;
 
-    if (showedImages < totalHits) {
+    if (showedImages <= totalHits) {
       refs.loader.classList.remove('loader--hidden');
       startObserver();
     }
@@ -120,7 +120,7 @@ async function loadMoreImages() {
   try {
     const data = await pixabay.loadNextImages();
 
-    if (showedImages === totalHits) {
+    if (showedImages >= totalHits) {
       refs.loader.classList.add('loader--hidden');
 
       stopObserver();
